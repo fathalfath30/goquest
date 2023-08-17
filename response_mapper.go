@@ -17,7 +17,9 @@
 
 package goquest
 
-func ResponseMapper[T any]() (T, error) {
+import "net/http"
+
+func ResponseMapper[T any](response *http.Response) (T, error) {
 	var sample T
 
 	return sample, nil

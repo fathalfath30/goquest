@@ -18,12 +18,18 @@
 package goquest_test
 
 import (
+	"bytes"
 	"github.com/fathalfath30/goquest"
 	"github.com/fathalfath30/goquest/testdata"
+	"io"
+	"net/http"
 )
 
 func (ts *GoQuesTestSuite) Test_ItCanMappingResponseBodyToStruct() {
-	mp, err := goquest.ResponseMapper[testdata.Response]()
+	mp, err := goquest.ResponseMapper[testdata.Response](&http.Response{
+		StatusCode: http.StatusOK,
+		Body:       io.NopCloser(bytes.NewReader([]byte(testdata.SampleSuccessJson))),
+	})
 
 	ts.Require().NotNil(mp)
 	ts.Require().Nil(err)

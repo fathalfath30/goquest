@@ -27,4 +27,6 @@ type (
 	}
 )
 
-var ()
+var (
+	SampleSuccessJson = `{"status":{"code":200,"message":"get oke"},"data":{"lorem":"ipsum"}}`
+)
