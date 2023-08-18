@@ -92,6 +92,10 @@ func NewContentType(value string) ContentType {
 	}
 }
 
+func (ct ContentType) ContentType() string {
+	return ct.contentType
+}
+
 func (ct ContentType) IsApplication() bool {
 	switch ct.contentType {
 	case ContentTypeAppEDIX12, ContentTypeAppEDIFAC, ContentTypeAppJavascript,

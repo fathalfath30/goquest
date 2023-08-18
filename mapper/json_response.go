@@ -19,8 +19,11 @@ package mapper
 
 import (
 	"encoding/json"
+	"github.com/fathalfath30/goquest"
+	"github.com/fathalfath30/goquest/utils"
 	"io"
 	"net/http"
+	"strings"
 )
 
 // JsonResponse mapping json response from byte to selected T function this
@@ -39,11 +42,16 @@ func JsonResponse[T any](response *http.Response) (T, error) {
 		return sample, err
 	}
 
-	// unmarshalling json
-	err = json.Unmarshal(rsp, &sample)
-	if err != nil {
-		return sample, err
+	contentType := utils.NewContentType(response.Header.Get("Content-Type"))
+	if strings.Contains(contentType.ContentType(), "application/json") {
+		// unmarshalling json
+		err = json.Unmarshal(rsp, &sample)
+		if err != nil {
+			return sample, err
+		}
+
+		return sample, StatusCode(response)
 	}
 
-	return sample, nil
+	return sample, goquest.ErrorUnsupportedContentType
 }

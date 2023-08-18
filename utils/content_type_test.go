@@ -17,8 +17,14 @@
 
 package utils_test
 
-import "github.com/fathalfath30/goquest/utils"
+import (
+	"github.com/fathalfath30/goquest/utils"
+)
 
+func (ts *UtilsTestSuite) Test_ContentType_CanReturnValue() {
+
+	ts.Require().Equal(utils.NewContentType(utils.ContentTypeAppJson).IsApplication())
+}
 func (ts *UtilsTestSuite) Test_ContentType_IsApplication() {
 	ts.Run("should return true", func() {
 		contentTypes := []string{

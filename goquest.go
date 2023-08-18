@@ -17,7 +17,14 @@
 
 package goquest
 
-import "net/http"
+import (
+	"errors"
+	"net/http"
+)
+
+var (
+	ErrorUnsupportedContentType = errors.New("unsupported Content-Type")
+)
 
 //go:generate mockery --name IHttpClient --filename http_client.mock.go --structname HttpClientMock
 //go:generate mockery --name IGoQuest --filename goquest.mock.go --structname GoQuestMock

@@ -50,6 +50,7 @@ func (ts *MapperTestSuite) Test_ResponseMapper_ErrorHandling() {
 		mp, err := mapper.JsonResponse[*testdata.Response](
 			&http.Response{
 				StatusCode: http.StatusOK,
+				Header:     testdata.SampleJsonHeader,
 				Body:       testdata.InvalidJsonResponse,
 			},
 		)
@@ -61,22 +62,25 @@ func (ts *MapperTestSuite) Test_ResponseMapper_ErrorHandling() {
 }
 
 func (ts *MapperTestSuite) Test_ItCanMappingResponseBodyToStruct() {
-	mp, err := mapper.JsonResponse[*testdata.Response](
-		&http.Response{
-			StatusCode: http.StatusOK,
-			Body:       io.NopCloser(bytes.NewReader([]byte(testdata.SampleSuccessJson))),
-		},
-	)
+	ts.Run("json response", func() {
+		mp, err := mapper.JsonResponse[*testdata.Response](
+			&http.Response{
+				StatusCode: http.StatusOK,
+				Header:     testdata.SampleJsonHeader,
+				Body:       io.NopCloser(bytes.NewReader([]byte(testdata.SampleSuccessJson))),
+			},
+		)
 
-	ts.Require().NotNil(mp)
-	ts.Require().Nil(err)
-	ts.Require().IsType(&testdata.Response{}, mp)
+		ts.Require().NotNil(mp)
+		ts.Require().Nil(err)
+		ts.Require().IsType(&testdata.Response{}, mp)
 
-	ts.Require().IsType(&testdata.Status{}, mp.Status)
-	ts.Require().Equal(http.StatusOK, mp.Status.Code)
-	ts.Require().Equal(testdata.GetOke, mp.Status.Message)
+		ts.Require().IsType(&testdata.Status{}, mp.Status)
+		ts.Require().Equal(http.StatusOK, mp.Status.Code)
+		ts.Require().Equal(testdata.GetOke, mp.Status.Message)
 
-	ts.Require().NotNil(mp.Data)
-	ts.Require().IsType(&testdata.Data{}, mp.Data)
-	ts.Require().Equal(testdata.Ipsum, mp.Data.Lorem)
+		ts.Require().NotNil(mp.Data)
+		ts.Require().IsType(&testdata.Data{}, mp.Data)
+		ts.Require().Equal(testdata.Ipsum, mp.Data.Lorem)
+	})
 }
