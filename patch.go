@@ -17,7 +17,7 @@
 
 package goquest
 
-func (g GoQuest) Patch() ([]byte, error) {
+func (gq *GoQuest) Patch() ([]byte, error) {
 	//TODO implement me
 	panic("implement me")
 }

@@ -17,7 +17,12 @@
 
 package goquest
 
-func (g GoQuest) Get() ([]byte, error) {
-	//TODO implement me
-	panic("implement me")
+import "net/http"
+
+func (gq *GoQuest) Get() ([]byte, error) {
+	_, err := http.NewRequest(http.MethodGet, "/lorem-iupsum", nil)
+	if err != nil {
+		return nil, err
+	}
+	return nil, nil
 }

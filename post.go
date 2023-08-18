@@ -17,7 +17,7 @@
 
 package goquest
 
-func (g GoQuest) Post() ([]byte, error) {
+func (gq *GoQuest) Post() ([]byte, error) {
 	//TODO implement me
 	panic("implement me")
 }

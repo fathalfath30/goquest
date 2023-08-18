@@ -43,7 +43,7 @@ func JsonResponse[T any](response *http.Response) (T, error) {
 	}
 
 	contentType := utils.NewContentType(response.Header.Get("Content-Type"))
-	if strings.Contains(contentType.ContentType(), "application/json") {
+	if strings.Contains(contentType.ContentType(), utils.ContentTypeAppJson) {
 		// unmarshalling json
 		err = json.Unmarshal(rsp, &sample)
 		if err != nil {

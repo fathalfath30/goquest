@@ -60,7 +60,6 @@ func (ts *MapperTestSuite) Test_ResponseMapper_ErrorHandling() {
 		ts.Require().Equal("invalid character '<' looking for beginning of value", err.Error())
 	})
 }
-
 func (ts *MapperTestSuite) Test_ItCanMappingResponseBodyToStruct() {
 	ts.Run("json response", func() {
 		mp, err := mapper.JsonResponse[*testdata.Response](

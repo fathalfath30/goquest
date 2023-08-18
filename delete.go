@@ -17,7 +17,7 @@
 
 package goquest
 
-func (g GoQuest) Delete() ([]byte, error) {
+func (gq GoQuest) Delete() ([]byte, error) {
 	//TODO implement me
 	panic("implement me")
 }

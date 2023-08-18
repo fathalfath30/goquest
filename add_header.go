@@ -17,7 +17,7 @@
 
 package goquest
 
-func (g GoQuest) AddHeader(key, value string) IGoQuest {
+func (gq *GoQuest) AddHeader(key, value string) IGoQuest {
 	//TODO implement me
 	panic("implement me")
 }
