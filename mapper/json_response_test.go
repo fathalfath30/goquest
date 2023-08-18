@@ -19,7 +19,6 @@ package mapper_test
 
 import (
 	"bytes"
-	"github.com/fathalfath30/goquest"
 	"github.com/fathalfath30/goquest/mapper"
 	"github.com/fathalfath30/goquest/mocks"
 	"github.com/fathalfath30/goquest/testdata"
@@ -28,7 +27,7 @@ import (
 	"net/http"
 )
 
-func (ts *goquest.GoQuesTestSuite) Test_ResponseMapper_ErrorHandling() {
+func (ts *MapperTestSuite) Test_ResponseMapper_ErrorHandling() {
 	readCloserMock := mocks.NewMockReadCloser()
 	// if Read is called, it will return error
 	readCloserMock.On("Read", mock.Anything).
@@ -61,7 +60,7 @@ func (ts *goquest.GoQuesTestSuite) Test_ResponseMapper_ErrorHandling() {
 	})
 }
 
-func (ts *goquest.GoQuesTestSuite) Test_ItCanMappingResponseBodyToStruct() {
+func (ts *MapperTestSuite) Test_ItCanMappingResponseBodyToStruct() {
 	mp, err := mapper.JsonResponse[*testdata.Response](
 		&http.Response{
 			StatusCode: http.StatusOK,
