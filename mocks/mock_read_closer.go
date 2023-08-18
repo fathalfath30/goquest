@@ -15,12 +15,24 @@
 //
 */
 
-package goquest
+package mocks
 
-import "net/http"
+import "github.com/stretchr/testify/mock"
 
-func ResponseMapper[T any](response *http.Response) (T, error) {
-	var sample T
+type MockReadCloser struct {
+	mock.Mock
+}
 
-	return sample, nil
+func (m *MockReadCloser) Read(p []byte) (n int, err error) {
+	args := m.Called(p)
+	return args.Int(0), args.Error(1)
+}
+
+func (m *MockReadCloser) Close() error {
+	args := m.Called()
+	return args.Error(0)
+}
+
+func NewMockReadCloser() *MockReadCloser {
+	return &MockReadCloser{}
 }

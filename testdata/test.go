@@ -17,9 +17,21 @@
 
 package testdata
 
+import (
+	"bytes"
+	"errors"
+	"io"
+)
+
 type (
-	Status struct{}
-	Data   struct{}
+	Status struct {
+		Code    int    `json:"code"`
+		Message string `json:"message"`
+	}
+
+	Data struct {
+		Lorem string `json:"lorem"`
+	}
 
 	Response struct {
 		Status *Status `json:"status"`
@@ -28,5 +40,12 @@ type (
 )
 
 var (
+	GetOke = "get oke"
+	Ipsum  = "ipsum"
+
 	SampleSuccessJson = `{"status":{"code":200,"message":"get oke"},"data":{"lorem":"ipsum"}}`
+
+	ErrorReadingResponseBody = errors.New("error reading body")
+
+	InvalidJsonResponse = io.NopCloser(bytes.NewReader([]byte("<string>")))
 )

@@ -15,7 +15,7 @@
 //
 */
 
-package goquest_test
+package mocks
 
 import (
 	"bytes"
