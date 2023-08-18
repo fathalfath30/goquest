@@ -1,0 +1,38 @@
+{
+  "name": "goquest",
+  "description": "Simple http request for GO, inspired by Guzzle",
+  "version": "1.0.0",
+  "repository": "https://github.com/fathalfath30/goquest",
+  "author": "fathalfath <fathalfath30@gmail.com>",
+  "license": "MIT",
+  "engines": {
+    "npm": "please-use-yarn",
+    "yarn": ">= 1.19.1"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^12.1.1",
+    "@commitlint/config-conventional": "^12.1.1",
+    "commitizen": "^4.2.3",
+    "custom-cz-conventional-changelog-for-jira": "^0.0.0-semantically-released",
+    "husky": "^6.0.0",
+    "pre-commit": "^1.2.2",
+    "cz-conventional-changelog": "^3.3.0",
+    "nodemon": "2.0.7"
+  },
+  "dependencies": {},
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/custom-cz-conventional-changelog-for-jira",
+      "jiraOptional": true
+    }
+  },
+  "scripts": {
+    "check:mod": "echo \"Updating go.mod ...\" && go mod tidy",
+    "repo:test": "echo \"Running unit test for the whole project ... \" && go test ./... -v",
+    "init": "rm -rf vendor && go mod tidy && go mod verify",
+    "git:no-ssl": "git -c http.sslVerify=false"
+  },
+  "pre-commit": {
+    "run": []
+  }
+}
