@@ -96,6 +96,7 @@ func (ct ContentType) ContentType() string {
 	return ct.contentType
 }
 
+// IsApplication will check Content-Type for is application type
 func (ct ContentType) IsApplication() bool {
 	switch ct.contentType {
 	case ContentTypeAppEDIX12, ContentTypeAppEDIFAC, ContentTypeAppJavascript,
@@ -109,6 +110,7 @@ func (ct ContentType) IsApplication() bool {
 	}
 }
 
+// IsAudio will check Content-Type for is audio
 func (ct ContentType) IsAudio() bool {
 	switch ct.contentType {
 	case
@@ -122,6 +124,7 @@ func (ct ContentType) IsAudio() bool {
 	}
 }
 
+// IsImage will check Content-Type for is images
 func (ct ContentType) IsImage() bool {
 	switch ct.contentType {
 	case
@@ -139,6 +142,7 @@ func (ct ContentType) IsImage() bool {
 	}
 }
 
+// IsMultipart will check Content-Type for is multipart
 func (ct ContentType) IsMultipart() bool {
 	switch ct.contentType {
 	case
@@ -152,6 +156,7 @@ func (ct ContentType) IsMultipart() bool {
 	}
 }
 
+// IsText will check Content-Type for is text
 func (ct ContentType) IsText() bool {
 	switch ct.contentType {
 	case
@@ -167,6 +172,7 @@ func (ct ContentType) IsText() bool {
 	}
 }
 
+// IsVideo will check Content-Type for is video
 func (ct ContentType) IsVideo() bool {
 	switch ct.contentType {
 	case
@@ -183,6 +189,7 @@ func (ct ContentType) IsVideo() bool {
 	}
 }
 
+// IsVnd will check Content-Type for is vnd
 func (ct ContentType) IsVnd() bool {
 	switch ct.contentType {
 	case

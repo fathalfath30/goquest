@@ -18,7 +18,6 @@
 package utils_test
 
 import (
-	"context"
 	"github.com/stretchr/testify/suite"
 	"testing"
 )
@@ -27,37 +26,11 @@ import (
 type (
 	UtilsTestSuite struct {
 		suite.Suite
-
-		t   *testing.T
-		ctx context.Context
+		t *testing.T
 	}
 )
 
 // Test_RunUtilsTestSuite Running the test suite
 func Test_RunUtilsTestSuite(t *testing.T) {
 	suite.Run(t, &UtilsTestSuite{t: t})
-}
-
-// SetupSuite this function executes before the test suite begins
-// execution
-func (ts *UtilsTestSuite) SetupSuite() {
-	// set StartingNumber to one
-}
-
-// TearDownSuite which will run after all the tests in the suite
-// have been run.
-func (ts *UtilsTestSuite) TearDownSuite() {
-	// todo: TearDownSuite
-}
-
-// SetupTest SetupTestSuite has a SetupTest method, which will run
-// before each test in the suite.
-func (ts *UtilsTestSuite) SetupTest() {
-	ts.ctx = context.Background()
-}
-
-// TearDownTest TearDownTestSuite has a TearDownTest method, which
-// will run after each test in the suite.
-func (ts *UtilsTestSuite) TearDownTest() {
-	// todo: TearDownTest
 }

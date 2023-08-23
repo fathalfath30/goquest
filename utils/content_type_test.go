@@ -22,8 +22,7 @@ import (
 )
 
 func (ts *UtilsTestSuite) Test_ContentType_CanReturnValue() {
-
-	ts.Require().Equal(utils.NewContentType(utils.ContentTypeAppJson).IsApplication())
+	ts.Require().Equal(utils.ContentTypeAppJson, utils.NewContentType(utils.ContentTypeAppJson).ContentType())
 }
 func (ts *UtilsTestSuite) Test_ContentType_IsApplication() {
 	ts.Run("should return true", func() {
