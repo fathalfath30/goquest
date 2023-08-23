@@ -22,6 +22,7 @@ import (
 	"github.com/fathalfath30/goquest/mapper"
 	"github.com/fathalfath30/goquest/mocks"
 	"github.com/fathalfath30/goquest/testdata"
+	"github.com/fathalfath30/goquest/utils"
 	"github.com/stretchr/testify/mock"
 	"io"
 	"net/http"
@@ -61,7 +62,7 @@ func (ts *MapperTestSuite) Test_ResponseMapper_ErrorHandling() {
 	})
 }
 func (ts *MapperTestSuite) Test_ItCanMappingResponseBodyToStruct() {
-	ts.Run("json response", func() {
+	ts.Run(utils.ContentTypeAppJson, func() {
 		mp, err := mapper.JsonResponse[*testdata.Response](
 			&http.Response{
 				StatusCode: http.StatusOK,
