@@ -15,31 +15,14 @@
 //
 */
 
-package goquest
+package goquest_test
 
-import "net/http"
+import "github.com/fathalfath30/goquest"
 
-func New(cfg *Config) IGoQuest {
-	gq := new(GoQuest)
-	if cfg != nil {
-		// input custom transport
-		if cfg.Transport != nil {
-			gq.transport = cfg.Transport
-		}
+func (ts *GoQuesTestSuite) Test_Post() {
+	actual, err := goquest.New(nil).
+		Post("/test", nil)
 
-		// input custom header
-		if cfg.Header != nil {
-			gq.header = cfg.Header
-		}
-
-		if cfg.Client != nil {
-			gq.client = cfg.Client
-		}
-	}
-
-	if gq.client == nil {
-		gq.client = &http.Client{}
-	}
-
-	return gq
+	ts.Require().Nil(err)
+	ts.Require().NotNil(actual)
 }

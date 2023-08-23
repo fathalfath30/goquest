@@ -15,31 +15,28 @@
 //
 */
 
-package goquest
+package goquest_test
 
-import "net/http"
+import (
+	"github.com/fathalfath30/goquest"
+	"net/http"
+)
 
-func New(cfg *Config) IGoQuest {
-	gq := new(GoQuest)
-	if cfg != nil {
-		// input custom transport
-		if cfg.Transport != nil {
-			gq.transport = cfg.Transport
-		}
+func (ts *GoQuesTestSuite) Test_InitialSetup() {
+	ts.Run("it should return default value", func() {
+		gq := goquest.New(nil)
+		ts.Require().NotNil(gq)
+		ts.Require().IsType(&goquest.GoQuest{}, gq)
+	})
 
-		// input custom header
-		if cfg.Header != nil {
-			gq.header = cfg.Header
-		}
+	ts.Run("it can set default header from client", func() {
+		gq := goquest.New(&goquest.Config{
+			Client:    &http.Client{},
+			Header:    &http.Header{},
+			Transport: &http.Transport{},
+		})
 
-		if cfg.Client != nil {
-			gq.client = cfg.Client
-		}
-	}
-
-	if gq.client == nil {
-		gq.client = &http.Client{}
-	}
-
-	return gq
+		ts.Require().NotNil(gq)
+		ts.Require().IsType(&goquest.GoQuest{}, gq)
+	})
 }

@@ -15,31 +15,4 @@
 //
 */
 
-package goquest
-
-import "net/http"
-
-func New(cfg *Config) IGoQuest {
-	gq := new(GoQuest)
-	if cfg != nil {
-		// input custom transport
-		if cfg.Transport != nil {
-			gq.transport = cfg.Transport
-		}
-
-		// input custom header
-		if cfg.Header != nil {
-			gq.header = cfg.Header
-		}
-
-		if cfg.Client != nil {
-			gq.client = cfg.Client
-		}
-	}
-
-	if gq.client == nil {
-		gq.client = &http.Client{}
-	}
-
-	return gq
-}
+package goquest_test

@@ -17,7 +17,8 @@
 
 package goquest
 
-func (gq *GoQuest) Post() ([]byte, error) {
-	//TODO implement me
-	panic("implement me")
+import "net/http"
+
+func (gq *GoQuest) Post(endpoint string, option *RequestOption) (*Response, error) {
+	return gq.Send(http.MethodPost, endpoint, option)
 }

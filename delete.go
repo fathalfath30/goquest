@@ -17,7 +17,8 @@
 
 package goquest
 
-func (gq GoQuest) Delete() ([]byte, error) {
-	//TODO implement me
-	panic("implement me")
+import "net/http"
+
+func (gq *GoQuest) Delete(endpoint string, option *RequestOption) (*Response, error) {
+	return gq.Send(http.MethodDelete, endpoint, option)
 }

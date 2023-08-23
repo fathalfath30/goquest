@@ -19,10 +19,6 @@ package goquest
 
 import "net/http"
 
-func (gq *GoQuest) Get() ([]byte, error) {
-	_, err := http.NewRequest(http.MethodGet, "/lorem-iupsum", nil)
-	if err != nil {
-		return nil, err
-	}
-	return nil, nil
+func (gq *GoQuest) Get(endpoint string, option *RequestOption) (*Response, error) {
+	return gq.Send(http.MethodGet, endpoint, option)
 }
