@@ -15,15 +15,16 @@
 //
 */
 
-package exception
+package exception_test
 
-type (
-	IException interface {
-		// GetStatus will return http status code
-		GetStatus() int
+import "github.com/fathalfath30/goquest/exception"
 
-		// GetMessage will return http message (from status code), for example if status code
-		// is 404 then it will return "not found"
-		GetMessage() string
-	}
-)
+func (ts *ExceptionTestSuite) Test_GeneralException() {
+	ts.Run("it can create new HttpRequestException and return default value if message are empty", func() {
+		actual := exception.NewGeneralException("lorem ipsum")
+
+		ts.Require().NotNil(actual)
+		ts.Require().IsType(&exception.GeneralException{}, actual)
+		ts.Require().Equal("lorem ipsum", actual.Error())
+	})
+}
