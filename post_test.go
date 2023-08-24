@@ -23,10 +23,14 @@ import (
 )
 
 func (ts *GoQuesTestSuite) Test_Post() {
-	cfg := &goquest.Config{Client: testdata.ValidHttpOkJson(ts.t)}
-	actual, err := goquest.New(cfg).
-		Post(testdata.ValidSampleEndpoint, nil)
+	gq, err := goquest.New(&goquest.Config{
+		Client: testdata.ValidHttpOkJson(ts.t),
+	})
 
+	ts.Require().Nil(err)
+	ts.Require().NotNil(gq)
+
+	actual, err := gq.Post(testdata.ValidSampleEndpoint, nil)
 	ts.Require().Nil(err)
 	ts.Require().NotNil(actual)
 }

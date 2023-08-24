@@ -24,13 +24,15 @@ import (
 
 func (ts *GoQuesTestSuite) Test_InitialSetup() {
 	ts.Run("it should return default value", func() {
-		gq := goquest.New(nil)
+		gq, err := goquest.New(nil)
+
 		ts.Require().NotNil(gq)
 		ts.Require().IsType(&goquest.GoQuest{}, gq)
+		ts.Require().Nil(err)
 	})
 
 	ts.Run("it can set default header from client", func() {
-		gq := goquest.New(&goquest.Config{
+		gq, err := goquest.New(&goquest.Config{
 			Client:    &http.Client{},
 			Header:    &http.Header{},
 			Transport: &http.Transport{},
@@ -38,5 +40,6 @@ func (ts *GoQuesTestSuite) Test_InitialSetup() {
 
 		ts.Require().NotNil(gq)
 		ts.Require().IsType(&goquest.GoQuest{}, gq)
+		ts.Require().Nil(err)
 	})
 }

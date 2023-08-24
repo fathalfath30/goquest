@@ -19,7 +19,7 @@ package goquest
 
 import "net/http"
 
-func New(cfg *Config) IGoQuest {
+func New(cfg *Config) (IGoQuest, error) {
 	gq := new(GoQuest)
 	if cfg != nil {
 		// input custom transport
@@ -41,5 +41,5 @@ func New(cfg *Config) IGoQuest {
 		gq.client = &http.Client{}
 	}
 
-	return gq
+	return gq, nil
 }
