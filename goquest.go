@@ -20,6 +20,7 @@ package goquest
 import (
 	"encoding/json"
 	"github.com/fathalfath30/goquest/exception"
+	"io"
 	"net/http"
 )
 
@@ -81,10 +82,18 @@ type (
 		// Json is used to send json encoded data as the part of body request, and also
 		// if this option is not empty Content-Type "application/json" will be
 		// automatically added if there is no "application/json" present on header
-		Json json.RawMessage
+		Json   json.RawMessage
+		Header http.Header
 	}
 
 	Response struct {
-		StatusCode int
+		Status     string // e.g. "200 OK"
+		StatusCode int    // e.g. 200
+
+		// Header maps header keys to values.
+		Header http.Header
+
+		// Body represents the response body.
+		Body io.ReadCloser
 	}
 )

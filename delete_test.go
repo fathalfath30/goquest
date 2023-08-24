@@ -17,11 +17,15 @@
 
 package goquest_test
 
-import "github.com/fathalfath30/goquest"
+import (
+	"github.com/fathalfath30/goquest"
+	"github.com/fathalfath30/goquest/testdata"
+)
 
 func (ts *GoQuesTestSuite) Test_Delete() {
-	actual, err := goquest.New(nil).
-		Delete("/test", nil)
+	cfg := &goquest.Config{Client: testdata.ValidHttpOkJson(ts.t)}
+	actual, err := goquest.New(cfg).
+		Delete(testdata.ValidSampleEndpoint, nil)
 
 	ts.Require().Nil(err)
 	ts.Require().NotNil(actual)

@@ -17,11 +17,15 @@
 
 package goquest_test
 
-import "github.com/fathalfath30/goquest"
+import (
+	"github.com/fathalfath30/goquest"
+	"github.com/fathalfath30/goquest/testdata"
+)
 
 func (ts *GoQuesTestSuite) Test_Get() {
-	actual, err := goquest.New(nil).
-		Get("/test", nil)
+	cfg := &goquest.Config{Client: testdata.ValidHttpOkJson(ts.t)}
+	actual, err := goquest.New(cfg).
+		Get(testdata.ValidSampleEndpoint, nil)
 
 	ts.Require().Nil(err)
 	ts.Require().NotNil(actual)

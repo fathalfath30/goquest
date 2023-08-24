@@ -18,36 +18,36 @@
 package goquest
 
 import (
-	"fmt"
+	"github.com/fathalfath30/goquest/mapper"
+	"io"
 	"net/http"
-	"strings"
 )
 
 func (gq *GoQuest) Send(method, endpoint string, requestOption *RequestOption) (*Response, error) {
-	req, err := http.NewRequest(method, gq.BaseUrl, strings.NewReader(""))
-	if err != nil {
-		return nil, err
-	}
+	var reader io.Reader = nil
+	result := &Response{}
 
-	// put default header
+	// initialize default http header
 	header := http.Header{}
+
+	// get default header from GoQuest
 	if gq.header != nil {
 		header = *gq.header
 	}
 
-	if requestOption != nil {
-		// if request option has json we need to add "Content-Type: application/json" header if not exists
-		if requestOption.Json != nil {
-			// Loop over header names
-			for name, values := range header {
-				// Loop over all values for the name.
-				for _, value := range values {
-					fmt.Println(name, value)
-				}
-			}
-		}
+	req, err := http.NewRequest(method, gq.BaseUrl, reader)
+	if err != nil {
+		return result, err
 	}
 
 	req.Header = header
-	return nil, nil
+	res, err := gq.client.Do(req)
+	if err != nil {
+		return result, err
+	}
+
+	result.Status = res.Status
+	result.StatusCode = res.StatusCode
+
+	return result, mapper.StatusCode(res)
 }
