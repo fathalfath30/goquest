@@ -15,13 +15,18 @@
 //
 */
 
-package goquest
+package exception_test
 
 import (
-	"context"
-	"net/http"
+	"github.com/fathalfath30/goquest/exception"
 )
 
-func (gq *GoQuest) Delete(ctx context.Context, endpoint string, option *RequestOption) (*Response, error) {
-	return gq.Send(ctx, http.MethodDelete, endpoint, option)
+func (ts *ExceptionTestSuite) Test_HttpRequestException() {
+	ts.Run("it can create new HttpRequestException and return default value if message are empty", func() {
+		actual := exception.NewHttpRequestException("lorem ipsum")
+
+		ts.Require().NotNil(actual)
+		ts.Require().IsType(&exception.HttpRequestException{}, actual)
+		ts.Require().Equal("lorem ipsum", actual.Error())
+	})
 }

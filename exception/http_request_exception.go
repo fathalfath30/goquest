@@ -15,13 +15,20 @@
 //
 */
 
-package goquest
+package exception
 
-import (
-	"context"
-	"net/http"
+type (
+	HttpRequestException struct {
+		message string
+	}
 )
 
-func (gq *GoQuest) Delete(ctx context.Context, endpoint string, option *RequestOption) (*Response, error) {
-	return gq.Send(ctx, http.MethodDelete, endpoint, option)
+func NewHttpRequestException(message string) error {
+	return &HttpRequestException{
+		message: message,
+	}
+}
+
+func (e *HttpRequestException) Error() string {
+	return e.message
 }

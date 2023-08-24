@@ -15,13 +15,26 @@
 //
 */
 
-package goquest
+package goquest_test
 
 import (
-	"context"
+	"github.com/fathalfath30/goquest"
+	"github.com/fathalfath30/goquest/testdata"
 	"net/http"
 )
 
-func (gq *GoQuest) Delete(ctx context.Context, endpoint string, option *RequestOption) (*Response, error) {
-	return gq.Send(ctx, http.MethodDelete, endpoint, option)
+func (ts *GoQuesTestSuite) Test_Send_PositiveJourney() {
+	ts.Run("it can set request", func() {
+		gq, err := goquest.New(testdata.ValidSampleEndpoint, &goquest.Config{
+			BaseUrl: testdata.ValidSampleBaseUrl,
+			Client:  testdata.ValidHttpOkJson(ts.t),
+		})
+
+		ts.Require().Nil(err)
+		ts.Require().NotNil(gq)
+
+		actual, err := gq.Send(ts.ctx, http.MethodGet, testdata.ValidSampleEndpoint, nil)
+		ts.Require().NotNil(actual)
+		ts.Require().Nil(err)
+	})
 }

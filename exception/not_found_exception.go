@@ -15,13 +15,21 @@
 //
 */
 
-package goquest
+package exception
 
-import (
-	"context"
-	"net/http"
+type (
+	NotFoundException struct {
+		statusCode int
+		message    string
+	}
 )
 
-func (gq *GoQuest) Delete(ctx context.Context, endpoint string, option *RequestOption) (*Response, error) {
-	return gq.Send(ctx, http.MethodDelete, endpoint, option)
+func NewNotFoundException(message string) error {
+	return &NotFoundException{
+		message: message,
+	}
+}
+
+func (e *NotFoundException) Error() string {
+	return e.message
 }

@@ -17,11 +17,41 @@
 
 package goquest
 
-func New(client *IHttpClient, cfg ...*Config) IGoQuest {
+import (
+	"github.com/fathalfath30/goquest/exception"
+	"net/http"
+	"net/url"
+)
+
+func New(baseUrl string, cfg *Config) (IGoQuest, error) {
 	gq := new(GoQuest)
-	if client == nil {
-		// todo: setup http client
+	u, err := url.Parse(baseUrl)
+	if err != nil {
+		return nil, exception.NewGeneralException("failed to parse base url: " + err.Error())
 	}
 
-	return gq
+	gq.BaseUrl = u
+
+	if cfg != nil {
+		// input custom transport
+		if cfg.Transport != nil {
+			gq.transport = cfg.Transport
+		}
+
+		// input custom header
+		if cfg.Header != nil {
+			gq.header = cfg.Header
+		}
+
+		// put user defined
+		if cfg.Client != nil {
+			gq.client = cfg.Client
+		}
+	}
+
+	if gq.client == nil {
+		gq.client = &http.Client{}
+	}
+
+	return gq, nil
 }

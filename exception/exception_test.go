@@ -15,13 +15,30 @@
 //
 */
 
-package goquest
+package exception_test
 
 import (
 	"context"
-	"net/http"
+	"github.com/stretchr/testify/suite"
+	"testing"
 )
 
-func (gq *GoQuest) Delete(ctx context.Context, endpoint string, option *RequestOption) (*Response, error) {
-	return gq.Send(ctx, http.MethodDelete, endpoint, option)
+// ExceptionTestSuite is used to simplify generating test case
+type (
+	ExceptionTestSuite struct {
+		suite.Suite
+		t   *testing.T
+		ctx context.Context
+	}
+)
+
+// Test_RunExceptionTestSuite Running the test suite
+func Test_RunExceptionTestSuite(t *testing.T) {
+	suite.Run(t, &ExceptionTestSuite{t: t})
+}
+
+// SetupTest SetupTestSuite has a SetupTest method, which will run
+// before each test in the suite.
+func (ts *ExceptionTestSuite) SetupTest() {
+	ts.ctx = context.Background()
 }

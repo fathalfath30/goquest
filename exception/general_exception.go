@@ -15,13 +15,21 @@
 //
 */
 
-package goquest
+package exception
 
-import (
-	"context"
-	"net/http"
+type (
+	GeneralException struct {
+		statusCode int
+		message    string
+	}
 )
 
-func (gq *GoQuest) Delete(ctx context.Context, endpoint string, option *RequestOption) (*Response, error) {
-	return gq.Send(ctx, http.MethodDelete, endpoint, option)
+func NewGeneralException(message string) error {
+	return &GeneralException{
+		message: message,
+	}
+}
+
+func (e *GeneralException) Error() string {
+	return e.message
 }

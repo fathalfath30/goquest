@@ -15,13 +15,11 @@
 //
 */
 
-package goquest
+package testdata
 
-import (
-	"context"
-	"net/http"
+var (
+	ValidSampleBaseUrl  = "http://localhost"
+	ValidSampleEndpoint = "/lorem/ipsum"
+
+	SampleSuccessJson = `{"status":{"code":200,"message":"get oke"},"data":{"lorem":"ipsum"}}`
 )
-
-func (gq *GoQuest) Delete(ctx context.Context, endpoint string, option *RequestOption) (*Response, error) {
-	return gq.Send(ctx, http.MethodDelete, endpoint, option)
-}

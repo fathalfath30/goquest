@@ -21,6 +21,7 @@ import (
 	"bytes"
 	"errors"
 	"io"
+	"net/http"
 )
 
 type (
@@ -43,9 +44,13 @@ var (
 	GetOke = "get oke"
 	Ipsum  = "ipsum"
 
-	SampleSuccessJson = `{"status":{"code":200,"message":"get oke"},"data":{"lorem":"ipsum"}}`
-
 	ErrorReadingResponseBody = errors.New("error reading body")
 
 	InvalidJsonResponse = io.NopCloser(bytes.NewReader([]byte("<string>")))
+
+	SampleJsonHeader = func() http.Header {
+		h := http.Header{}
+		h.Set("Content-Type", "application/json")
+		return h
+	}()
 )

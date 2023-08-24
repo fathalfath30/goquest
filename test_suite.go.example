@@ -1,0 +1,44 @@
+import (
+	"context"
+	"github.com/stretchr/testify/suite"
+	"testing"
+)
+
+// TemplateTestSuite is used to simplify generating test case
+type (
+	TemplateTestSuite struct {
+		suite.Suite
+
+		t   *testing.T
+		ctx context.Context
+	}
+)
+
+// Test_RunTemplateTestSuite Running the test suite
+func Test_RunTemplateTestSuite(t *testing.T) {
+	suite.Run(t, &TemplateTestSuite{t: t})
+}
+
+// SetupSuite this function executes before the test suite begins
+// execution
+func (ts *TemplateTestSuite) SetupSuite() {
+	// set StartingNumber to one
+}
+
+// TearDownSuite which will run after all the tests in the suite
+// have been run.
+func (ts *TemplateTestSuite) TearDownSuite() {
+	// todo: TearDownSuite
+}
+
+// SetupTest SetupTestSuite has a SetupTest method, which will run
+// before each test in the suite.
+func (ts *TemplateTestSuite) SetupTest() {
+	ts.ctx = context.Background()
+}
+
+// TearDownTest TearDownTestSuite has a TearDownTest method, which
+// will run after each test in the suite.
+func (ts *TemplateTestSuite) TearDownTest() {
+	// todo: TearDownTest
+}

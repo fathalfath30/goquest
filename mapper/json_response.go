@@ -23,27 +23,27 @@ import (
 	"net/http"
 )
 
-// JsonResponse mapping json response from byte to selected T function this
-// method also mapping status code, for example informational response (100 - 199),
-// successful response (200 - 299) and redirection message (300 - 399) will not return error
-// but for client error response (400 - 499) and server error response this method will
-// return errors.
+// JsonResponse will map any json response to expected struct
 func JsonResponse[T any](response *http.Response) (T, error) {
-	var sample T
+	var obj T
+	var err error
+	var rsp []byte
+
+	// close json body
 	defer response.Body.Close()
 
 	// read response body and transform it into []byte to unmarshall
 	// with generic type
-	rsp, err := io.ReadAll(response.Body)
+	rsp, err = io.ReadAll(response.Body)
 	if err != nil {
-		return sample, err
+		return obj, err
 	}
 
 	// unmarshalling json
-	err = json.Unmarshal(rsp, &sample)
+	err = json.Unmarshal(rsp, &obj)
 	if err != nil {
-		return sample, err
+		return obj, err
 	}
 
-	return sample, nil
+	return obj, StatusCode(response)
 }

@@ -15,13 +15,22 @@
 //
 */
 
-package goquest
+package utils_test
 
 import (
-	"context"
-	"net/http"
+	"github.com/stretchr/testify/suite"
+	"testing"
 )
 
-func (gq *GoQuest) Delete(ctx context.Context, endpoint string, option *RequestOption) (*Response, error) {
-	return gq.Send(ctx, http.MethodDelete, endpoint, option)
+// UtilsTestSuite is used to simplify generating test case
+type (
+	UtilsTestSuite struct {
+		suite.Suite
+		t *testing.T
+	}
+)
+
+// Test_RunUtilsTestSuite Running the test suite
+func Test_RunUtilsTestSuite(t *testing.T) {
+	suite.Run(t, &UtilsTestSuite{t: t})
 }
