@@ -17,40 +17,7 @@
 
 package testdata
 
-import (
-	"bytes"
-	"errors"
-	"io"
-	"net/http"
-)
-
-type (
-	Status struct {
-		Code    int    `json:"code"`
-		Message string `json:"message"`
-	}
-
-	Data struct {
-		Lorem string `json:"lorem"`
-	}
-
-	Response struct {
-		Status *Status `json:"status"`
-		Data   *Data   `json:"data"`
-	}
-)
-
 var (
-	GetOke = "get oke"
-	Ipsum  = "ipsum"
-
-	ErrorReadingResponseBody = errors.New("error reading body")
-
-	InvalidJsonResponse = io.NopCloser(bytes.NewReader([]byte("<string>")))
-
-	SampleJsonHeader = func() http.Header {
-		h := http.Header{}
-		h.Set("Content-Type", "application/json")
-		return h
-	}()
+	ValidSampleEndpoint = "/lorem/ipsum"
+	SampleSuccessJson   = `{"status":{"code":200,"message":"get oke"},"data":{"lorem":"ipsum"}}`
 )
