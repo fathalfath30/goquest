@@ -17,8 +17,11 @@
 
 package goquest
 
-import "net/http"
+import (
+	"context"
+	"net/http"
+)
 
-func (gq *GoQuest) Put(endpoint string, option *RequestOption) (*Response, error) {
-	return gq.Send(http.MethodPut, endpoint, option)
+func (gq *GoQuest) Put(ctx context.Context, endpoint string, option *RequestOption) (*Response, error) {
+	return gq.Send(ctx, http.MethodPut, endpoint, option)
 }

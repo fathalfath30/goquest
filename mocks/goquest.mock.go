@@ -3,6 +3,8 @@
 package mocks
 
 import (
+	context "context"
+
 	goquest "github.com/fathalfath30/goquest"
 	mock "github.com/stretchr/testify/mock"
 )
@@ -28,25 +30,25 @@ func (_m *GoQuestMock) AddHeader(key string, value string) goquest.IGoQuest {
 	return r0
 }
 
-// Delete provides a mock function with given fields: endpoint, option
-func (_m *GoQuestMock) Delete(endpoint string, option *goquest.RequestOption) (*goquest.Response, error) {
-	ret := _m.Called(endpoint, option)
+// Delete provides a mock function with given fields: ctx, endpoint, option
+func (_m *GoQuestMock) Delete(ctx context.Context, endpoint string, option *goquest.RequestOption) (*goquest.Response, error) {
+	ret := _m.Called(ctx, endpoint, option)
 
 	var r0 *goquest.Response
 	var r1 error
-	if rf, ok := ret.Get(0).(func(string, *goquest.RequestOption) (*goquest.Response, error)); ok {
-		return rf(endpoint, option)
+	if rf, ok := ret.Get(0).(func(context.Context, string, *goquest.RequestOption) (*goquest.Response, error)); ok {
+		return rf(ctx, endpoint, option)
 	}
-	if rf, ok := ret.Get(0).(func(string, *goquest.RequestOption) *goquest.Response); ok {
-		r0 = rf(endpoint, option)
+	if rf, ok := ret.Get(0).(func(context.Context, string, *goquest.RequestOption) *goquest.Response); ok {
+		r0 = rf(ctx, endpoint, option)
 	} else {
 		if ret.Get(0) != nil {
 			r0 = ret.Get(0).(*goquest.Response)
 		}
 	}
 
-	if rf, ok := ret.Get(1).(func(string, *goquest.RequestOption) error); ok {
-		r1 = rf(endpoint, option)
+	if rf, ok := ret.Get(1).(func(context.Context, string, *goquest.RequestOption) error); ok {
+		r1 = rf(ctx, endpoint, option)
 	} else {
 		r1 = ret.Error(1)
 	}
@@ -54,25 +56,25 @@ func (_m *GoQuestMock) Delete(endpoint string, option *goquest.RequestOption) (*
 	return r0, r1
 }
 
-// Get provides a mock function with given fields: endpoint, option
-func (_m *GoQuestMock) Get(endpoint string, option *goquest.RequestOption) (*goquest.Response, error) {
-	ret := _m.Called(endpoint, option)
+// Get provides a mock function with given fields: ctx, endpoint, option
+func (_m *GoQuestMock) Get(ctx context.Context, endpoint string, option *goquest.RequestOption) (*goquest.Response, error) {
+	ret := _m.Called(ctx, endpoint, option)
 
 	var r0 *goquest.Response
 	var r1 error
-	if rf, ok := ret.Get(0).(func(string, *goquest.RequestOption) (*goquest.Response, error)); ok {
-		return rf(endpoint, option)
+	if rf, ok := ret.Get(0).(func(context.Context, string, *goquest.RequestOption) (*goquest.Response, error)); ok {
+		return rf(ctx, endpoint, option)
 	}
-	if rf, ok := ret.Get(0).(func(string, *goquest.RequestOption) *goquest.Response); ok {
-		r0 = rf(endpoint, option)
+	if rf, ok := ret.Get(0).(func(context.Context, string, *goquest.RequestOption) *goquest.Response); ok {
+		r0 = rf(ctx, endpoint, option)
 	} else {
 		if ret.Get(0) != nil {
 			r0 = ret.Get(0).(*goquest.Response)
 		}
 	}
 
-	if rf, ok := ret.Get(1).(func(string, *goquest.RequestOption) error); ok {
-		r1 = rf(endpoint, option)
+	if rf, ok := ret.Get(1).(func(context.Context, string, *goquest.RequestOption) error); ok {
+		r1 = rf(ctx, endpoint, option)
 	} else {
 		r1 = ret.Error(1)
 	}
@@ -80,25 +82,25 @@ func (_m *GoQuestMock) Get(endpoint string, option *goquest.RequestOption) (*goq
 	return r0, r1
 }
 
-// Patch provides a mock function with given fields: endpoint, option
-func (_m *GoQuestMock) Patch(endpoint string, option *goquest.RequestOption) (*goquest.Response, error) {
-	ret := _m.Called(endpoint, option)
+// Patch provides a mock function with given fields: ctx, endpoint, option
+func (_m *GoQuestMock) Patch(ctx context.Context, endpoint string, option *goquest.RequestOption) (*goquest.Response, error) {
+	ret := _m.Called(ctx, endpoint, option)
 
 	var r0 *goquest.Response
 	var r1 error
-	if rf, ok := ret.Get(0).(func(string, *goquest.RequestOption) (*goquest.Response, error)); ok {
-		return rf(endpoint, option)
+	if rf, ok := ret.Get(0).(func(context.Context, string, *goquest.RequestOption) (*goquest.Response, error)); ok {
+		return rf(ctx, endpoint, option)
 	}
-	if rf, ok := ret.Get(0).(func(string, *goquest.RequestOption) *goquest.Response); ok {
-		r0 = rf(endpoint, option)
+	if rf, ok := ret.Get(0).(func(context.Context, string, *goquest.RequestOption) *goquest.Response); ok {
+		r0 = rf(ctx, endpoint, option)
 	} else {
 		if ret.Get(0) != nil {
 			r0 = ret.Get(0).(*goquest.Response)
 		}
 	}
 
-	if rf, ok := ret.Get(1).(func(string, *goquest.RequestOption) error); ok {
-		r1 = rf(endpoint, option)
+	if rf, ok := ret.Get(1).(func(context.Context, string, *goquest.RequestOption) error); ok {
+		r1 = rf(ctx, endpoint, option)
 	} else {
 		r1 = ret.Error(1)
 	}
@@ -106,25 +108,25 @@ func (_m *GoQuestMock) Patch(endpoint string, option *goquest.RequestOption) (*g
 	return r0, r1
 }
 
-// Post provides a mock function with given fields: endpoint, option
-func (_m *GoQuestMock) Post(endpoint string, option *goquest.RequestOption) (*goquest.Response, error) {
-	ret := _m.Called(endpoint, option)
+// Post provides a mock function with given fields: ctx, endpoint, option
+func (_m *GoQuestMock) Post(ctx context.Context, endpoint string, option *goquest.RequestOption) (*goquest.Response, error) {
+	ret := _m.Called(ctx, endpoint, option)
 
 	var r0 *goquest.Response
 	var r1 error
-	if rf, ok := ret.Get(0).(func(string, *goquest.RequestOption) (*goquest.Response, error)); ok {
-		return rf(endpoint, option)
+	if rf, ok := ret.Get(0).(func(context.Context, string, *goquest.RequestOption) (*goquest.Response, error)); ok {
+		return rf(ctx, endpoint, option)
 	}
-	if rf, ok := ret.Get(0).(func(string, *goquest.RequestOption) *goquest.Response); ok {
-		r0 = rf(endpoint, option)
+	if rf, ok := ret.Get(0).(func(context.Context, string, *goquest.RequestOption) *goquest.Response); ok {
+		r0 = rf(ctx, endpoint, option)
 	} else {
 		if ret.Get(0) != nil {
 			r0 = ret.Get(0).(*goquest.Response)
 		}
 	}
 
-	if rf, ok := ret.Get(1).(func(string, *goquest.RequestOption) error); ok {
-		r1 = rf(endpoint, option)
+	if rf, ok := ret.Get(1).(func(context.Context, string, *goquest.RequestOption) error); ok {
+		r1 = rf(ctx, endpoint, option)
 	} else {
 		r1 = ret.Error(1)
 	}
@@ -132,25 +134,25 @@ func (_m *GoQuestMock) Post(endpoint string, option *goquest.RequestOption) (*go
 	return r0, r1
 }
 
-// Put provides a mock function with given fields: endpoint, option
-func (_m *GoQuestMock) Put(endpoint string, option *goquest.RequestOption) (*goquest.Response, error) {
-	ret := _m.Called(endpoint, option)
+// Put provides a mock function with given fields: ctx, endpoint, option
+func (_m *GoQuestMock) Put(ctx context.Context, endpoint string, option *goquest.RequestOption) (*goquest.Response, error) {
+	ret := _m.Called(ctx, endpoint, option)
 
 	var r0 *goquest.Response
 	var r1 error
-	if rf, ok := ret.Get(0).(func(string, *goquest.RequestOption) (*goquest.Response, error)); ok {
-		return rf(endpoint, option)
+	if rf, ok := ret.Get(0).(func(context.Context, string, *goquest.RequestOption) (*goquest.Response, error)); ok {
+		return rf(ctx, endpoint, option)
 	}
-	if rf, ok := ret.Get(0).(func(string, *goquest.RequestOption) *goquest.Response); ok {
-		r0 = rf(endpoint, option)
+	if rf, ok := ret.Get(0).(func(context.Context, string, *goquest.RequestOption) *goquest.Response); ok {
+		r0 = rf(ctx, endpoint, option)
 	} else {
 		if ret.Get(0) != nil {
 			r0 = ret.Get(0).(*goquest.Response)
 		}
 	}
 
-	if rf, ok := ret.Get(1).(func(string, *goquest.RequestOption) error); ok {
-		r1 = rf(endpoint, option)
+	if rf, ok := ret.Get(1).(func(context.Context, string, *goquest.RequestOption) error); ok {
+		r1 = rf(ctx, endpoint, option)
 	} else {
 		r1 = ret.Error(1)
 	}
@@ -158,25 +160,25 @@ func (_m *GoQuestMock) Put(endpoint string, option *goquest.RequestOption) (*goq
 	return r0, r1
 }
 
-// Send provides a mock function with given fields: method, endpoint, requestOption
-func (_m *GoQuestMock) Send(method string, endpoint string, requestOption *goquest.RequestOption) (*goquest.Response, error) {
-	ret := _m.Called(method, endpoint, requestOption)
+// Send provides a mock function with given fields: ctx, method, endpoint, requestOption
+func (_m *GoQuestMock) Send(ctx context.Context, method string, endpoint string, requestOption *goquest.RequestOption) (*goquest.Response, error) {
+	ret := _m.Called(ctx, method, endpoint, requestOption)
 
 	var r0 *goquest.Response
 	var r1 error
-	if rf, ok := ret.Get(0).(func(string, string, *goquest.RequestOption) (*goquest.Response, error)); ok {
-		return rf(method, endpoint, requestOption)
+	if rf, ok := ret.Get(0).(func(context.Context, string, string, *goquest.RequestOption) (*goquest.Response, error)); ok {
+		return rf(ctx, method, endpoint, requestOption)
 	}
-	if rf, ok := ret.Get(0).(func(string, string, *goquest.RequestOption) *goquest.Response); ok {
-		r0 = rf(method, endpoint, requestOption)
+	if rf, ok := ret.Get(0).(func(context.Context, string, string, *goquest.RequestOption) *goquest.Response); ok {
+		r0 = rf(ctx, method, endpoint, requestOption)
 	} else {
 		if ret.Get(0) != nil {
 			r0 = ret.Get(0).(*goquest.Response)
 		}
 	}
 
-	if rf, ok := ret.Get(1).(func(string, string, *goquest.RequestOption) error); ok {
-		r1 = rf(method, endpoint, requestOption)
+	if rf, ok := ret.Get(1).(func(context.Context, string, string, *goquest.RequestOption) error); ok {
+		r1 = rf(ctx, method, endpoint, requestOption)
 	} else {
 		r1 = ret.Error(1)
 	}

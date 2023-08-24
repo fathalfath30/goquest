@@ -18,6 +18,8 @@
 package testdata
 
 var (
+	ValidSampleBaseUrl  = "http://localhost"
 	ValidSampleEndpoint = "/lorem/ipsum"
-	SampleSuccessJson   = `{"status":{"code":200,"message":"get oke"},"data":{"lorem":"ipsum"}}`
+
+	SampleSuccessJson = `{"status":{"code":200,"message":"get oke"},"data":{"lorem":"ipsum"}}`
 )

@@ -18,12 +18,13 @@
 package goquest
 
 import (
+	"context"
 	"github.com/fathalfath30/goquest/mapper"
 	"io"
 	"net/http"
 )
 
-func (gq *GoQuest) Send(method, endpoint string, requestOption *RequestOption) (*Response, error) {
+func (gq *GoQuest) Send(ctx context.Context, method, endpoint string, requestOption *RequestOption) (*Response, error) {
 	var reader io.Reader = nil
 	result := &Response{}
 
@@ -35,7 +36,7 @@ func (gq *GoQuest) Send(method, endpoint string, requestOption *RequestOption) (
 		header = *gq.header
 	}
 
-	req, err := http.NewRequest(method, gq.BaseUrl, reader)
+	req, err := http.NewRequestWithContext(ctx, method, gq.BaseUrl.JoinPath(endpoint).String(), reader)
 	if err != nil {
 		return result, err
 	}

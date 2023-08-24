@@ -18,10 +18,12 @@
 package goquest
 
 import (
+	"context"
 	"encoding/json"
 	"github.com/fathalfath30/goquest/exception"
 	"io"
 	"net/http"
+	"net/url"
 )
 
 var (
@@ -38,13 +40,13 @@ type (
 	IGoQuest interface {
 		AddHeader(key, value string) IGoQuest
 
-		Post(endpoint string, option *RequestOption) (*Response, error)
-		Get(endpoint string, option *RequestOption) (*Response, error)
-		Patch(endpoint string, option *RequestOption) (*Response, error)
-		Put(endpoint string, option *RequestOption) (*Response, error)
-		Delete(endpoint string, option *RequestOption) (*Response, error)
+		Post(ctx context.Context, endpoint string, option *RequestOption) (*Response, error)
+		Get(ctx context.Context, endpoint string, option *RequestOption) (*Response, error)
+		Patch(ctx context.Context, endpoint string, option *RequestOption) (*Response, error)
+		Put(ctx context.Context, endpoint string, option *RequestOption) (*Response, error)
+		Delete(ctx context.Context, endpoint string, option *RequestOption) (*Response, error)
 
-		Send(method, endpoint string, requestOption *RequestOption) (*Response, error)
+		Send(ctx context.Context, method, endpoint string, requestOption *RequestOption) (*Response, error)
 	}
 
 	Config struct {
@@ -66,7 +68,7 @@ type (
 		client IHttpClient
 
 		// base url
-		BaseUrl string
+		BaseUrl *url.URL
 
 		// Http transport
 		transport *http.Transport

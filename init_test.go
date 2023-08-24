@@ -19,20 +19,20 @@ package goquest_test
 
 import (
 	"github.com/fathalfath30/goquest"
+	"github.com/fathalfath30/goquest/testdata"
 	"net/http"
 )
 
 func (ts *GoQuesTestSuite) Test_InitialSetup() {
 	ts.Run("it should return default value", func() {
-		gq, err := goquest.New(nil)
+		gq, err := goquest.New(testdata.ValidSampleBaseUrl, nil)
 
 		ts.Require().NotNil(gq)
 		ts.Require().IsType(&goquest.GoQuest{}, gq)
 		ts.Require().Nil(err)
 	})
-
 	ts.Run("it can set default header from client", func() {
-		gq, err := goquest.New(&goquest.Config{
+		gq, err := goquest.New(testdata.ValidSampleBaseUrl, &goquest.Config{
 			Client:    &http.Client{},
 			Header:    &http.Header{},
 			Transport: &http.Transport{},
@@ -41,5 +41,23 @@ func (ts *GoQuesTestSuite) Test_InitialSetup() {
 		ts.Require().NotNil(gq)
 		ts.Require().IsType(&goquest.GoQuest{}, gq)
 		ts.Require().Nil(err)
+	})
+	ts.Run("it can set baseUrl", func() {
+		gq, err := goquest.New(testdata.ValidSampleBaseUrl, &goquest.Config{
+			BaseUrl: testdata.ValidSampleBaseUrl,
+		})
+
+		ts.Require().NotNil(gq)
+		ts.Require().IsType(&goquest.GoQuest{}, gq)
+		ts.Require().Nil(err)
+	})
+}
+func (ts *GoQuesTestSuite) Test_InitialSetup_MustHandleError() {
+	ts.Run("it should handle error when failed parse base url", func() {
+		gq, err := goquest.New("-://localhost:we", nil)
+
+		ts.Require().Nil(gq)
+		ts.Require().Error(err)
+		ts.Require().Contains(err.Error(), "failed to parse base url")
 	})
 }
