@@ -1,0 +1,345 @@
+{
+  "uuid": "8d2c3339-4df4-4e01-b7d5-a30bea5438ab",
+  "lastMigration": 29,
+  "name": "GoQuest Mock",
+  "endpointPrefix": "",
+  "latency": 0,
+  "port": 8080,
+  "hostname": "localhost",
+  "folders": [
+    {
+      "uuid": "76190a2a-329f-4017-b872-0b0896213d31",
+      "name": "GET",
+      "collapsed": false,
+      "children": [
+        {
+          "type": "route",
+          "uuid": "613e1450-578f-41ea-b054-37ea9c1e7df6"
+        },
+        {
+          "type": "route",
+          "uuid": "0fca28d4-2418-459a-bf81-017a9590ce27"
+        }
+      ]
+    },
+    {
+      "uuid": "da1e140f-ed26-4f0b-9a35-66064c78c5e4",
+      "name": "POST",
+      "collapsed": false,
+      "children": [
+        {
+          "type": "route",
+          "uuid": "76fe2773-a533-4551-9673-b3dcbb484bca"
+        }
+      ]
+    }
+  ],
+  "routes": [
+    {
+      "uuid": "613e1450-578f-41ea-b054-37ea9c1e7df6",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "sample-get/success",
+      "responses": [
+        {
+          "uuid": "5c783a62-becc-4b8e-ac15-4d982a5084f2",
+          "body": "{\n  \"status\": {\n    \"code\": 200,\n    \"success\": true\n  },\n  \"data\": {\n    \"firstName\": \"Alfath\",\n    \"lastName\": \"Dioni\"\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "This is sample GET request with 0 latency and without any authorization, it should be fine in any case",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id"
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "0fca28d4-2418-459a-bf81-017a9590ce27",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "sample-get/with-auth",
+      "responses": [
+        {
+          "uuid": "b72b1d86-5e1a-4609-b6de-32bba7295e43",
+          "body": "{\n  \"status\": {\n    \"code\": 200,\n    \"success\": true\n  },\n  \"data\": {\n    \"firstName\": \"Alfath\",\n    \"lastName\": \"Dioni\"\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "This sample GET request with authorization if authorization is provided",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "Authorization",
+              "value": "",
+              "invert": true,
+              "operator": "null"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "dc2fab1d-3235-4038-8105-18a38e97972c",
+          "body": "{\n  \"status\": {\n    \"code\": 401,\n    \"success\": false\n  },\n  \"data\": {\n    \"error\": [\n      \"unauthorized access\"\n    ]\n  }\n}",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "Authorization",
+              "value": "",
+              "invert": false,
+              "operator": "null"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "76fe2773-a533-4551-9673-b3dcbb484bca",
+      "type": "http",
+      "documentation": "",
+      "method": "post",
+      "endpoint": "sample-post/success",
+      "responses": [
+        {
+          "uuid": "877ae301-b395-410d-835a-39d25f6f3372",
+          "body": "{\n  \"status\": {\n    \"code\": 201,\n    \"success\": true\n  },\n  \"data\": {\n    \"message\": \"data has been created\"\n  }\n}",
+          "latency": 0,
+          "statusCode": 201,
+          "label": "",
+          "headers": [
+            {
+              "key": "",
+              "value": ""
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "body",
+              "modifier": "username",
+              "value": "admin",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "body",
+              "modifier": "password",
+              "value": "admin",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "1a5b53cb-fbe0-4e24-8d76-4b0ab319d43c",
+          "body": "{\n  \"status\": {\n    \"code\": 400,\n    \"success\": false\n  },\n  \"data\": {\n    \"error\": [\n      \"username are required\",\n      \"password are required\"\n    ]\n  }\n}",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "Empty username and password",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "body",
+              "modifier": "username",
+              "value": "",
+              "invert": false,
+              "operator": "null"
+            },
+            {
+              "target": "body",
+              "modifier": "password",
+              "value": "",
+              "invert": false,
+              "operator": "null"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "fc4363c6-014e-4f56-b02b-ad029adbc0d6",
+          "body": "{\n  \"status\": {\n    \"code\": 400,\n    \"success\": false\n  },\n  \"data\": {\n    \"error\": [\n      \"username are required\"\n    ]\n  }\n}",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "Empty username",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "body",
+              "modifier": "username",
+              "value": "",
+              "invert": false,
+              "operator": "null"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "825b9be8-9b1d-4584-b20f-9c40fa7d48e1",
+          "body": "{\n  \"status\": {\n    \"code\": 400,\n    \"success\": false\n  },\n  \"data\": {\n    \"error\": [\n      \"password are required\"\n    ]\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Empty password",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "body",
+              "modifier": "password",
+              "value": "",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        },
+        {
+          "uuid": "b846e106-57eb-403f-980e-71c8b043a7e4",
+          "body": "{\n  \"status\": {\n    \"code\": 400,\n    \"success\": false\n  },\n  \"data\": {\n    \"error\": [\n      \"invalid username or password\"\n    ]\n  }\n}",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id"
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    }
+  ],
+  "rootChildren": [
+    {
+      "type": "folder",
+      "uuid": "76190a2a-329f-4017-b872-0b0896213d31"
+    },
+    {
+      "type": "folder",
+      "uuid": "da1e140f-ed26-4f0b-9a35-66064c78c5e4"
+    }
+  ],
+  "proxyMode": false,
+  "proxyHost": "",
+  "proxyRemovePrefix": false,
+  "tlsOptions": {
+    "enabled": false,
+    "type": "CERT",
+    "pfxPath": "",
+    "certPath": "",
+    "keyPath": "",
+    "caPath": "",
+    "passphrase": ""
+  },
+  "cors": true,
+  "headers": [
+    {
+      "key": "Content-Type",
+      "value": "application/json"
+    },
+    {
+      "key": "Access-Control-Allow-Origin",
+      "value": "*"
+    },
+    {
+      "key": "Access-Control-Allow-Methods",
+      "value": "GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS"
+    },
+    {
+      "key": "Access-Control-Allow-Headers",
+      "value": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
+    },
+    {
+      "key": "X-Request-Time",
+      "value": "{{now}}"
+    },
+    {
+      "key": "X-Request-ID",
+      "value": "{{faker 'string.uuid'}}"
+    }
+  ],
+  "proxyReqHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "proxyResHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "data": []
+}
