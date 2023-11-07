@@ -23,7 +23,7 @@ import (
 )
 
 func (ts *GoQuesTestSuite) Test_Put() {
-	gq, err := goquest.New(testdata.ValidSampleEndpoint, &goquest.Config{
+	gq, err := goquest.New(&goquest.Config{
 		BaseUrl: testdata.ValidSampleBaseUrl,
 		Client:  testdata.ValidHttpOkJson(ts.t),
 	})

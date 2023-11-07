@@ -23,30 +23,43 @@ import (
 	"net/url"
 )
 
-func New(baseUrl string, cfg *Config) (IGoQuest, error) {
+func New(cfg *Config) (IGoQuest, error) {
 	gq := new(GoQuest)
-	u, err := url.Parse(baseUrl)
+	if cfg == nil {
+		// put default url if config is not set
+		gq.BaseUrl = func() *url.URL {
+			defaultUrl, _ := url.Parse("http://localhost")
+			return defaultUrl
+		}()
+
+		gq.queryParam = gq.BaseUrl.Query()
+		// immediately return GoQuest
+		return gq, nil
+	}
+
+	u, err := url.Parse(cfg.BaseUrl)
 	if err != nil {
 		return nil, exception.NewGeneralException("failed to parse base url: " + err.Error())
 	}
 
 	gq.BaseUrl = u
+	gq.queryParam = gq.BaseUrl.Query()
+	gq.dumpRequest = cfg.DumpRequest
+	gq.dumpResponse = cfg.DumpResponse
 
-	if cfg != nil {
-		// input custom transport
-		if cfg.Transport != nil {
-			gq.transport = cfg.Transport
-		}
+	// input custom transport
+	if cfg.Transport != nil {
+		gq.transport = cfg.Transport
+	}
 
-		// input custom header
-		if cfg.Header != nil {
-			gq.header = cfg.Header
-		}
+	// input custom header
+	if cfg.Header != nil {
+		gq.header = cfg.Header
+	}
 
-		// put user defined
-		if cfg.Client != nil {
-			gq.client = cfg.Client
-		}
+	// put user defined
+	if cfg.Client != nil {
+		gq.client = cfg.Client
 	}
 
 	if gq.client == nil {

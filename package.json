@@ -33,6 +33,9 @@
     "git:no-ssl": "git -c http.sslVerify=false"
   },
   "pre-commit": {
-    "run": []
+    "run": [
+      "check:mod",
+      "repo:test"
+    ]
   }
 }

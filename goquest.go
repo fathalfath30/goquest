@@ -39,6 +39,7 @@ type (
 
 	IGoQuest interface {
 		AddHeader(key, value string) IGoQuest
+		AddQueryParam(key, value string) IGoQuest
 
 		Post(ctx context.Context, endpoint string, option *RequestOption) (*Response, error)
 		Get(ctx context.Context, endpoint string, option *RequestOption) (*Response, error)
@@ -59,6 +60,9 @@ type (
 		// default http header
 		Header *http.Header
 
+		DumpRequest  bool
+		DumpResponse bool
+
 		// main client
 		Client IHttpClient
 	}
@@ -76,6 +80,12 @@ type (
 		// default http header
 		header *http.Header
 
+		// Url Query Parameters
+		queryParam url.Values
+
+		dumpRequest  bool
+		dumpResponse bool
+
 		// main client
 		Client IHttpClient
 	}
@@ -84,7 +94,9 @@ type (
 		// Json is used to send json encoded data as the part of body request, and also
 		// if this option is not empty Content-Type "application/json" will be
 		// automatically added if there is no "application/json" present on header
-		Json   json.RawMessage
+		Json json.RawMessage
+
+		//  Header represents the key-value pairs in an HTTP header.
 		Header http.Header
 	}
 

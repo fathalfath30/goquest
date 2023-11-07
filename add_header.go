@@ -17,7 +17,13 @@
 
 package goquest
 
+import "net/http"
+
 func (gq *GoQuest) AddHeader(key, value string) IGoQuest {
-	//TODO implement me
-	panic("implement me")
+	if gq.header == nil {
+		gq.header = &http.Header{}
+	}
+
+	gq.header.Add(key, value)
+	return gq
 }

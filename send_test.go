@@ -25,7 +25,7 @@ import (
 
 func (ts *GoQuesTestSuite) Test_Send_PositiveJourney() {
 	ts.Run("it can set request", func() {
-		gq, err := goquest.New(testdata.ValidSampleEndpoint, &goquest.Config{
+		gq, err := goquest.New(&goquest.Config{
 			BaseUrl: testdata.ValidSampleBaseUrl,
 			Client:  testdata.ValidHttpOkJson(ts.t),
 		})
