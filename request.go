@@ -25,3 +25,15 @@ import (
 func (gq *GoQuest) Delete(ctx context.Context, endpoint string, option *RequestOption) (*Response, error) {
 	return gq.Send(ctx, http.MethodDelete, endpoint, option)
 }
+func (gq *GoQuest) Get(ctx context.Context, endpoint string, option *RequestOption) (*Response, error) {
+	return gq.Send(ctx, http.MethodGet, endpoint, option)
+}
+func (gq *GoQuest) Patch(ctx context.Context, endpoint string, option *RequestOption) (*Response, error) {
+	return gq.Send(ctx, http.MethodPatch, endpoint, option)
+}
+func (gq *GoQuest) Post(ctx context.Context, endpoint string, option *RequestOption) (*Response, error) {
+	return gq.Send(ctx, http.MethodPost, endpoint, option)
+}
+func (gq *GoQuest) Put(ctx context.Context, endpoint string, option *RequestOption) (*Response, error) {
+	return gq.Send(ctx, http.MethodPut, endpoint, option)
+}
