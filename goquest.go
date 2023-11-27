@@ -39,6 +39,7 @@ type (
 
 	IGoQuest interface {
 		AddHeader(key, value string) IGoQuest
+		GetHeader(key string) string
 		AddQueryParam(key, value string) IGoQuest
 
 		Post(ctx context.Context, endpoint string, option *RequestOption) (*Response, error)

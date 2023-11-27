@@ -52,6 +52,9 @@ func (gq *GoQuest) Send(ctx context.Context, method, endpoint string, requestOpt
 		}
 	}
 
+	// update go quest header
+	gq.header = &header
+
 	req, err := http.NewRequestWithContext(ctx, method, gq.BaseUrl.JoinPath(endpoint).String(), body)
 	if err != nil {
 		return result, err
