@@ -15,23 +15,4 @@
 //
 */
 
-package goquest_test
-
-import (
-	"github.com/fathalfath30/goquest"
-	"github.com/fathalfath30/goquest/testdata"
-)
-
-func (ts *GoQuesTestSuite) Test_Patch() {
-	gq, err := goquest.New(&goquest.Config{
-		BaseUrl: testdata.ValidSampleBaseUrl,
-		Client:  testdata.ValidHttpOkJson(ts.t),
-	})
-
-	ts.Require().Nil(err)
-	ts.Require().NotNil(gq)
-
-	actual, err := gq.Patch(ts.ctx, testdata.ValidSampleEndpoint, nil)
-	ts.Require().Nil(err)
-	ts.Require().NotNil(actual)
-}
+package goquest

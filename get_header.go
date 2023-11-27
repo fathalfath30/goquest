@@ -17,11 +17,10 @@
 
 package goquest
 
-import (
-	"context"
-	"net/http"
-)
+func (gq *GoQuest) GetHeader(key string) string {
+	if gq.header == nil {
+		return ""
+	}
 
-func (gq *GoQuest) Put(ctx context.Context, endpoint string, option *RequestOption) (*Response, error) {
-	return gq.Send(ctx, http.MethodPut, endpoint, option)
+	return gq.header.Get(key)
 }
